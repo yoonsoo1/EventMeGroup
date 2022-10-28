@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "65167902632",
+    "project_id": "eventmegroup-7053e",
+    "storage_bucket": "eventmegroup-7053e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65167902632:android:b86ac6ea02b8ad7e1e7f9d",
+        "android_client_info": {
+          "package_name": "com.example.eventmegroup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65167902632-s22g4c27n0de3rh1msh7hs43kk4eg3a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl6weC4-odCrdw-VqO_ol8VzOuc4IwCM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "65167902632-s22g4c27n0de3rh1msh7hs43kk4eg3a4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
