@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,10 +29,10 @@ public class SignUpActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        emailSignUp = findViewById(R.id.sign_up_email);
-        passSignUp = findViewById(R.id.sign_up_pass);
-        signUpBtn = findViewById(R.id.sign_up_btn);
-        signInText = findViewById(R.id.sign_in_txt);
+        emailSignUp = findViewById(R.id.sign_in_email);
+        passSignUp = findViewById(R.id.sign_in_pass);
+        signUpBtn = findViewById(R.id.sign_in_btn);
+        signInText = findViewById(R.id.sign_up_txt);
 
         signInText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
                                 Toast.makeText(SignUpActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                                // startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
+//                                startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
                                 finish();
                             }
                             else {

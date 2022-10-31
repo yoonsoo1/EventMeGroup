@@ -24,10 +24,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if(currentUser == null) {
-            startActivity(new Intent(MainActivity.this, SignUpActivity.class));
-            finish();
-        }
+        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        finish();
+//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+//        if(currentUser == null) {
+//            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+//            finish();
+//        }
     }
 }
