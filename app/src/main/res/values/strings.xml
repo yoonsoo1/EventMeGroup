@@ -6,4 +6,6 @@
     <string name="already_reg">Already Have an Account? Sign In</string>
     <string name="sign_in">Sign In</string>
     <string name="not_registered">Not Registered Yet? Sign Up</string>
+    <string name="username">Enter Username</string>
+    <string name="save">Save</string>
 </resources>

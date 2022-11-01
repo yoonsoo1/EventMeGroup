@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.eventmegroup">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EventMeGroup"
         tools:targetApi="31">
+        <activity
+            android:name=".SetUpActivity"
+            android:exported="false" />
         <activity
             android:name=".SignInActivity"
             android:exported="false" />
@@ -28,6 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Profile" />
+        <activity android:name=".Map" />
+        <activity android:name=".Search" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />

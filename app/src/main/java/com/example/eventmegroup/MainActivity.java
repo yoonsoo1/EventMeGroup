@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 //        finish();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if(currentUser == null) {
-            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            startActivity(new Intent(MainActivity.this, SignUpActivity.class));
             finish();
         }
         else {
@@ -46,5 +46,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+//        System.out.println("here1");
+// test
+
     }
+
+    public void goProfile(View view){
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+//        System.out.println("here1");
+    }
+
+    public void goMap(View view){
+        Intent intent = new Intent(this, Map.class);
+        startActivity(intent);
+//        System.out.println("here3");
+    }
+
+    public void goSearch(View view){
+        Intent intent = new Intent(this, Search.class);
+        startActivity(intent);
+//        System.out.println("here5");
+    }
+
+
+
+
+
+
 }

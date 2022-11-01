@@ -5,19 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    tools:context=".Map">
 
     <include layout="@layout/nav_bar" />
 
     <TextView
-        android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="239dp"
+        android:layout_marginEnd="165dp"
+        android:text="map"
+        tools:layout_editor_absoluteX="202dp"
+        tools:layout_editor_absoluteY="342dp" />
 
 </RelativeLayout>
