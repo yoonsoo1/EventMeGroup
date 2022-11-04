@@ -8,7 +8,6 @@
     tools:context=".MainActivity"
     >
 
-
     <View
         android:layout_width="454dp"
         android:layout_height="44dp"

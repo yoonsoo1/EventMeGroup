@@ -18,25 +18,21 @@ public class Search extends AppCompatActivity {
     }
 
     public Search(){
-//        System.out.println("here2");
     }
 
     public void goProfile(View view){
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
-//        System.out.println("here1");
     }
 
     public void goMap(View view){
         Intent intent = new Intent(this, Map.class);
         startActivity(intent);
-//        System.out.println("here3");
     }
 
     public void goSearch(View view){
         Intent intent = new Intent(this, Search.class);
         startActivity(intent);
-//        System.out.println("here5");
     }
 
 }
