@@ -16,6 +16,15 @@
         <entry key="app/src/main/res/layout/profile.xml" value="0.23446197509765626" />
         <entry key="app/src/main/res/layout/search.xml" value="0.1884498480243161" />
         <entry key="app/src/main/res/menu/nav_bar.xml" value="0.2512820512820513" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2205" />
+        <entry key="app/src/main/res/drawable/rectangle.xml" value="0.2205" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2791666666666667" />
+        <entry key="app/src/main/res/layout/activity_set_up.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1358695652173913" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/nav_bar.xml" value="0.12952898550724637" />
+        <entry key="app/src/main/res/menu/nav_bar.xml" value="0.23125" />
       </map>
     </option>
   </component>

@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">EventMeGroup</string>
+    <string name="enter_email">Enter Your Email</string>
+    <string name="enter_pass">Enter Your Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_reg">Already Have an Account? Sign In</string>
+    <string name="sign_in">Sign In</string>
+    <string name="not_registered">Not Registered Yet? Sign Up</string>
+    <string name="username">Enter Username</string>
+    <string name="save">Save</string>
+    <string name="log_out">Log out</string>
+    <string name="birthday">Enter Your Birthday</string>
+    <string name="bday">Enter Birthday mm/dd/yyyy</string>
 </resources>
