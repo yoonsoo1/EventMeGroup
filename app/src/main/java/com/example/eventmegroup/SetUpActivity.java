@@ -50,6 +50,7 @@ public class SetUpActivity extends AppCompatActivity {
 
     private ImageView circleImageView;
     private EditText mProfileName;
+    private EditText bday;
     private Button mSaveBtn;
     private Button logOutBtn;
     private FirebaseAuth auth;
@@ -67,8 +68,10 @@ public class SetUpActivity extends AppCompatActivity {
 
         circleImageView = findViewById(R.id.circleImageView);
         mProfileName = findViewById(R.id.profile_name);
+        bday = findViewById(R.id.bday);
         mSaveBtn = findViewById(R.id.save_btn);
         logOutBtn = findViewById(R.id.log_out_btn);
+
 
         auth = FirebaseAuth.getInstance();
         uid = auth.getCurrentUser().getUid();
@@ -82,8 +85,10 @@ public class SetUpActivity extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     if(task.getResult().exists()) {
                         String name = task.getResult().getString("name");
+                        String birthdate = task.getResult().getString("bday");
                         String imgUri = task.getResult().getString("image");
                         mProfileName.setText(name);
+                        bday.setText(birthdate);
                         Glide.with(SetUpActivity.this).load(imgUri).into(circleImageView);
                     }
                 }
@@ -123,15 +128,15 @@ public class SetUpActivity extends AppCompatActivity {
                 pd.show();
 
                 String name = mProfileName.getText().toString();
+                String birthdate = bday.getText().toString();
 
-                if(!name.isEmpty() && imageUri != null) {
-                    final String randomKey = UUID.randomUUID().toString();
+                if(!name.isEmpty() && !birthdate.isEmpty() && imageUri != null) {
                     StorageReference sr = storageReference.child("Profile_pics").child(uid + ".jpg");
                     sr.putFile(imageUri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    saveToFireStore(name, sr);
+                                    saveToFireStore(name, birthdate, sr);
                                     Toast.makeText(SetUpActivity.this, "Upload Successful",Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(SetUpActivity.this, SignInActivity.class));
                                 }
@@ -157,13 +162,14 @@ public class SetUpActivity extends AppCompatActivity {
 
 
 
-    private void saveToFireStore(String name, StorageReference sr) {
+    private void saveToFireStore(String name, String birthdate, StorageReference sr) {
         sr.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 downloadUri = uri;
                 HashMap<String, Object> nameToImg = new HashMap<>();
                 nameToImg.put("name", name);
+                nameToImg.put("bday", birthdate);
                 nameToImg.put("image", downloadUri.toString());
 
                 db.collection("Users").document(uid).set(nameToImg).addOnCompleteListener(new OnCompleteListener<Void>() {
