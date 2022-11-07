@@ -14,8 +14,6 @@ public class EventBox extends AppCompatActivity {
     private Button date, time, location, eventName;
     private TextView description;
     private ImageView image;
-    private String temp;
-    private TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){  // show new, singular Event Box
