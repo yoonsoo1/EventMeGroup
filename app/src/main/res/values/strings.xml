@@ -8,4 +8,5 @@
     <string name="not_registered">Not Registered Yet? Sign Up</string>
     <string name="username">Enter Username</string>
     <string name="save">Save</string>
+    <string name="log_out">Log out</string>
 </resources>

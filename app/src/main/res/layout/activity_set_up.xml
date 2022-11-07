@@ -10,8 +10,7 @@
         android:id="@+id/circleImageView"
         android:layout_width="220dp"
         android:layout_height="220dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/profile"
         app:layout_constraintBottom_toTopOf="@+id/profile_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,8 +23,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="119dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
@@ -40,14 +39,24 @@
         android:id="@+id/save_btn"
         android:layout_width="302dp"
         android:layout_height="48dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginBottom="54dp"
         android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/log_out_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+
+    <Button
+        android:id="@+id/log_out_btn"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/log_out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/save_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

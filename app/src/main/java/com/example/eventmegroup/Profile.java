@@ -8,13 +8,35 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Profile extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+public class Profile extends AppCompatActivity {
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if(currentUser == null) {
+            startActivity(new Intent(Profile.this, SignInActivity.class));
+            finish();
+        }
+        else {
+            startActivity(new Intent(Profile.this, SetUpActivity.class));
+            finish();
+//            TextView tv = findViewById(R.id.status);
+//            tv.setText(currentUser.getEmail());
+//            tv.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    firebaseAuth.signOut();
+//                    finish();
+//                    startActivity(getIntent());
+//                }
+//            });
+        }
     }
 
     public Profile(){

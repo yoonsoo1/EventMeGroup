@@ -27,10 +27,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -38,6 +43,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class SetUpActivity extends AppCompatActivity {
@@ -45,10 +51,14 @@ public class SetUpActivity extends AppCompatActivity {
     private ImageView circleImageView;
     private EditText mProfileName;
     private Button mSaveBtn;
+    private Button logOutBtn;
     private FirebaseAuth auth;
     private Uri imageUri;
+    private String uid;
     private FirebaseStorage storage;
     private StorageReference storageReference;
+    private FirebaseFirestore db;
+    private Uri downloadUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +68,27 @@ public class SetUpActivity extends AppCompatActivity {
         circleImageView = findViewById(R.id.circleImageView);
         mProfileName = findViewById(R.id.profile_name);
         mSaveBtn = findViewById(R.id.save_btn);
+        logOutBtn = findViewById(R.id.log_out_btn);
 
         auth = FirebaseAuth.getInstance();
+        uid = auth.getCurrentUser().getUid();
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+        db = FirebaseFirestore.getInstance();
+
+        db.collection("Users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    if(task.getResult().exists()) {
+                        String name = task.getResult().getString("name");
+                        String imgUri = task.getResult().getString("image");
+                        mProfileName.setText(name);
+                        Glide.with(SetUpActivity.this).load(imgUri).into(circleImageView);
+                    }
+                }
+            }
+        });
 
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +105,15 @@ public class SetUpActivity extends AppCompatActivity {
             }
         });
 
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                auth.signOut();
+                finish();
+                startActivity(new Intent(SetUpActivity.this, MainActivity.class));
+            }
+        });
+
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,30 +122,63 @@ public class SetUpActivity extends AppCompatActivity {
                 pd.setTitle("Uploading Image...");
                 pd.show();
 
-                final String randomKey = UUID.randomUUID().toString();
-                StorageReference sr = storageReference.child("images/" + randomKey);
-                sr.putFile(imageUri)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(SetUpActivity.this, "Upload Successful",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SetUpActivity.this, SignInActivity.class));
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                pd.dismiss();
-                                Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                                double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                                pd.setMessage("Progress: " + (int) progressPercent + "%");
-                            }
-                        });
+                String name = mProfileName.getText().toString();
+
+                if(!name.isEmpty() && imageUri != null) {
+                    final String randomKey = UUID.randomUUID().toString();
+                    StorageReference sr = storageReference.child("Profile_pics").child(uid + ".jpg");
+                    sr.putFile(imageUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    saveToFireStore(name, sr);
+                                    Toast.makeText(SetUpActivity.this, "Upload Successful",Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(SetUpActivity.this, SignInActivity.class));
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                                    double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                                    pd.setMessage("Progress: " + (int) progressPercent + "%");
+                                }
+                            });
+                }
+            }
+        });
+    }
+
+
+
+    private void saveToFireStore(String name, StorageReference sr) {
+        sr.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                downloadUri = uri;
+                HashMap<String, Object> nameToImg = new HashMap<>();
+                nameToImg.put("name", name);
+                nameToImg.put("image", downloadUri.toString());
+
+                db.collection("Users").document(uid).set(nameToImg).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            Toast.makeText(SetUpActivity.this, "Successfully save profile settings", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SetUpActivity.this, Profile.class));
+                            finish();
+                        }
+                        else {
+                            Toast.makeText(SetUpActivity.this, "Failed to save profile settings", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }

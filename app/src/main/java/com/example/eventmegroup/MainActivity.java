@@ -27,25 +27,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        startActivity(new Intent(MainActivity.this, SignUpActivity.class));
+//        startActivity(new Intent(MainActivity.this, SetUpActivity.class));
 //        finish();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if(currentUser == null) {
-            startActivity(new Intent(MainActivity.this, SignUpActivity.class));
-            finish();
-        }
-        else {
-            TextView tv = findViewById(R.id.status);
-            tv.setText(currentUser.getEmail());
-            tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    firebaseAuth.signOut();
-                    finish();
-                    startActivity(getIntent());
-                }
-            });
-        }
+
 //        System.out.println("here1");
 // test
 
