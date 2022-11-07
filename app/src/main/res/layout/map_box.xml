@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <View
-        android:layout_width="214dp"
+        android:layout_width="272dp"
         android:layout_height="281dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="7dp"
         android:background="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="160dp" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362" />
 
     <TextView
         android:id="@+id/textView8"
@@ -23,13 +27,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="632dp"
-        android:layout_marginEnd="340dp"
-        android:text="Sponsor: "
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="340dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="336dp"
 
-        />
+        android:text="Sponsor: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView9"
@@ -40,8 +43,12 @@
         android:layout_marginStart="34dp"
         android:layout_marginBottom="38dp"
         android:text="See event details..."
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="394dp" />
+        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.589" />
 
     <TextView
         android:id="@+id/textView5"
@@ -49,11 +56,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="534dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="300dp"
         android:text="Date:"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="252dp" />
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
@@ -64,8 +72,12 @@
         android:layout_marginStart="13dp"
         android:layout_marginBottom="238dp"
         android:text="Event Name:"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="194dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.282"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36" />
 
     <TextView
         android:id="@+id/textView10"
@@ -77,7 +89,14 @@
         android:layout_marginBottom="238dp"
         android:text="CS310 Party"
         tools:layout_editor_absoluteX="293dp"
-        tools:layout_editor_absoluteY="194dp" />
+        tools:layout_editor_absoluteY="194dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362"
+        />
 
     <TextView
         android:id="@+id/textView11"
@@ -88,8 +107,13 @@
         android:layout_marginStart="126dp"
         android:layout_marginBottom="207dp"
         android:text="THH"
-        tools:layout_editor_absoluteX="293dp"
-        tools:layout_editor_absoluteY="222dp" />
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
 
     <TextView
         android:id="@+id/textView12"
@@ -100,8 +124,12 @@
         android:layout_marginStart="126dp"
         android:layout_marginBottom="176dp"
         android:text="11/8/2022"
-        tools:layout_editor_absoluteX="293dp"
-        tools:layout_editor_absoluteY="252dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559" />
 
     <TextView
         android:id="@+id/textView13"
@@ -109,11 +137,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="567dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="232dp"
         android:text="9:30"
-        tools:layout_editor_absoluteX="293dp"
-        tools:layout_editor_absoluteY="281dp" />
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView14"
@@ -121,11 +150,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="267dp"
-        android:layout_marginBottom="115dp"
+        android:layout_marginStart="228dp"
+
+        android:layout_marginTop="264dp"
         android:text="$5"
-        tools:layout_editor_absoluteX="293dp"
-        tools:layout_editor_absoluteY="311dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView15"
@@ -133,11 +163,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="632dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="336dp"
         android:text="USC"
-        tools:layout_editor_absoluteX="293dp"
-        tools:layout_editor_absoluteY="340dp" />
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView6"
@@ -145,11 +176,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="567dp"
-        android:layout_marginEnd="364dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="232dp"
         android:text="Time:"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="281dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
@@ -160,8 +191,12 @@
         android:layout_marginStart="13dp"
         android:layout_marginBottom="209dp"
         android:text="Location:"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="222dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.264"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.401" />
 
     <TextView
         android:id="@+id/textView7"
@@ -172,8 +207,12 @@
         android:layout_marginStart="13dp"
         android:layout_marginBottom="114dp"
         android:text="Cost:"
-        tools:layout_editor_absoluteX="197dp"
-        tools:layout_editor_absoluteY="311dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.237"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.443" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

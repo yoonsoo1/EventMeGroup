@@ -19,7 +19,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.eventmegroup.databinding.ActivityMapsBinding;
+//import com.example.eventmegroup.databinding.ActivityMapsBinding;
 
 public class Map extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter {
     private GoogleMap mMap;
