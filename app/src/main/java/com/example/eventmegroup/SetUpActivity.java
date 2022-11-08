@@ -72,7 +72,6 @@ public class SetUpActivity extends AppCompatActivity {
         mSaveBtn = findViewById(R.id.save_btn);
         logOutBtn = findViewById(R.id.log_out_btn);
 
-
         auth = FirebaseAuth.getInstance();
         uid = auth.getCurrentUser().getUid();
         storage = FirebaseStorage.getInstance();

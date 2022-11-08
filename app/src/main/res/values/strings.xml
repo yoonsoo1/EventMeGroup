@@ -9,6 +9,7 @@
     <string name="username">Enter Username</string>
     <string name="save">Save</string>
     <string name="log_out">Log out</string>
+    <string name="registeration">Register for this event</string>
     <string name="birthday">Enter Your Birthday</string>
     <string name="bday">Enter Birthday mm/dd/yyyy</string>
 </resources>
