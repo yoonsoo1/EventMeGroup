@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,10 +22,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 //import com.example.eventmegroup.databinding.ActivityMapsBinding;
 
-public class Map extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter {
+public class Map extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter, GoogleMap.OnInfoWindowClickListener {
     private GoogleMap mMap;
     Context context = null;
     LayoutInflater inflater;
+    String eventId = "OVKl6KxpkxZt8vhX1Mf9";
+
 //    private ActivityMapsBinding binding;
 
     @Override
@@ -48,6 +51,7 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
 
 //        mMap.setInfoWindowAdapter(new Map(this));
         mMap.setInfoWindowAdapter(this);
+        mMap.setOnInfoWindowClickListener(this);
     }
 
     public Map(){
@@ -69,6 +73,13 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
     public void goSearch(View view){
         Intent intent = new Intent(this, Search.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onInfoWindowClick(@NonNull Marker marker) {
+        Intent details = new Intent(Map.this, Detail.class);
+        details.putExtra("eventId", eventId);
+        startActivity(details);
     }
 
     @Nullable
