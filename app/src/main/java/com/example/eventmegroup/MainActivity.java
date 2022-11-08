@@ -27,8 +27,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        startActivity(new Intent(MainActivity.this, Map.class));
-        finish();
+        if(firebaseAuth.getCurrentUser() == null) {
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            finish();
+        }
+        else {
+            startActivity(new Intent(MainActivity.this, Map.class));
+            finish();
+        }
+
 
 //        System.out.println("here1");
 // test

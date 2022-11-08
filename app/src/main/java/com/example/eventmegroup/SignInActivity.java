@@ -20,6 +20,7 @@ public class SignInActivity extends AppCompatActivity {
     private EditText signInEmail, signInPass;
     private Button signInBtn;
     private TextView sign_up_text;
+    private TextView guest_text;
     private FirebaseAuth mAuth;
 
     @Override
@@ -33,6 +34,15 @@ public class SignInActivity extends AppCompatActivity {
         signInPass = findViewById(R.id.sign_in_pass);
         signInBtn = findViewById(R.id.sign_in_btn);
         sign_up_text = findViewById(R.id.sign_up_txt);
+        guest_text = findViewById(R.id.guest_txt);
+
+        guest_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignInActivity.this, Map.class));
+                finish();
+            }
+        });
 
         sign_up_text.setOnClickListener(new View.OnClickListener() {
             @Override

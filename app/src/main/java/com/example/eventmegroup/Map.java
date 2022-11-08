@@ -31,7 +31,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class Map extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter, GoogleMap.OnInfoWindowClickListener {
     private GoogleMap mMap;
     private FirebaseFirestore db;
-    private String uid;
     private FirebaseAuth auth;
     private String eventId;
 
@@ -52,7 +51,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
-        uid = auth.getCurrentUser().getUid();
 
         db.collection("Events").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
