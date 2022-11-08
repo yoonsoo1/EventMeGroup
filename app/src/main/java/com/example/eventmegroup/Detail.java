@@ -65,7 +65,7 @@ public class Detail extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() == null) {
             uid = null;
-            reg.setText(R.string.log_out);
+            reg.setText(R.string.sign_in);
         }
         else {
             uid = auth.getCurrentUser().getUid();
