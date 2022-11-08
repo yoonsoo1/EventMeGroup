@@ -13,10 +13,11 @@
     <string name="uploadPhoto">Upload new photo</string>
     <string name="date">Date</string>
     <string name="lastname">Last name</string>
-    <string name="owner">Are you owner;</string>
     <string name="re_enter_password">Re-enter Password</string>
     <string name="changepassword">Change password</string>
     <string name="loginregister">Login/Register</string>
     <string name="myprofile">My profile</string>
     <string name="eventname">Event Name</string>
+    <string name="register">Register Here</string>
+    <string name="color2">#DB6443</string>
 </resources>

@@ -33,7 +33,7 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="goToShop"
+                android:onClick="register"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -46,10 +46,10 @@
                 android:background="@android:color/transparent"
                 android:text="@string/eventname"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@android:color/black"
+                android:textColor="@color/redbrown"
                 android:textSize="32sp"
                 android:textStyle="normal|bold"
-                android:typeface="serif"
+                android:fontFamily="@font/nunito"
                 tools:ignore="ObsoleteLayoutParam" />
 
             <Button
@@ -59,9 +59,10 @@
                 android:background="@android:color/transparent"
                 android:text="@string/date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:typeface="serif"
+                android:textColor="@color/orange"
+                android:textSize="20sp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/nunito"
                 tools:ignore="ObsoleteLayoutParam" />
 
             <ScrollView
@@ -80,11 +81,12 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:text="@string/description"
+                    android:fontFamily="@font/montserrat"
                     android:ems="10"
                     android:maxLines="3"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     tools:fadingEdgeLength="8sp"
                     tools:ignore="ObsoleteLayoutParam" />
             </ScrollView>
@@ -93,13 +95,17 @@
                 android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:backgroundTint="@color/redbrown"
+                android:fontFamily="@font/nunito"
                 android:text="@string/register"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textColor="@color/cream"
+                android:textSize="20sp"
                 android:typeface="serif"
                 tools:ignore="ObsoleteLayoutParam"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="40dp"
                 />
 
 
