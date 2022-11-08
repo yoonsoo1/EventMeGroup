@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 
 import org.w3c.dom.Document;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -43,11 +44,15 @@ public class Detail extends AppCompatActivity {
     private TextView eventTime;
     private TextView eventNumPpl;
     private Button reg;
+    private boolean registered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        Intent i = getIntent();
+        String eventId = i.getStringExtra("eventId");
 
         eventName = findViewById(R.id.event_name);
         eventDate = findViewById(R.id.event_date);
@@ -64,16 +69,171 @@ public class Detail extends AppCompatActivity {
         }
         else {
             uid = auth.getCurrentUser().getUid();
-            reg.setText(R.string.registeration);
         }
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         db = FirebaseFirestore.getInstance();
 
-        Intent i = getIntent();
-        String eventId = i.getStringExtra("eventId");
+        loadPage(eventId);
 
+        if(auth.getCurrentUser() != null) {
+            db.collection("Users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    DocumentSnapshot ds = task.getResult();
+                    HashMap<String, Object> addEvents = new HashMap<>();
+                    ArrayList<String> events = (ArrayList<String>) ds.get("events");
+                    if(events == null) {
+                        registered = false;
+                        reg.setText(R.string.registeration);
+                    }
+                    else {
+                        if(events.contains(eventId)) {
+                            registered = true;
+                            reg.setText(R.string.unreg);
+                        }
+                        else {
+                            registered = false;
+                            reg.setText(R.string.registeration);
+                        }
+                    }
+                }
+            });
+        }
+
+        reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(auth.getCurrentUser() == null) {
+                    // User not logged in so send them to login page
+                    startActivity(new Intent(Detail.this, SignInActivity.class));
+                }
+                else {
+                    if(registered) {
+                        unregister(eventId);
+                    }
+                    else {
+                        // User is signed in so let them register
+                        db.collection("Users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                DocumentSnapshot ds = task.getResult();
+                                HashMap<String, Object> addEvents = new HashMap<>();
+                                List<String> events = (List<String>) ds.get("events");
+                                if(events == null) {
+                                    // If there is no events, it returns null
+                                    System.out.println("Events returned null");
+                                    // Add the event into the document
+                                    addEvents.put("events", Arrays.asList(eventId));
+                                    db.collection("Users").document(uid)
+                                            .update(addEvents)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.d(TAG, "DocumentSnapshot successfully updated!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error updating document", e);
+                                                }
+                                            });
+                                    db.collection("Events").document(eventId)
+                                            .update("numPeople", FieldValue.increment(1))
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.d(TAG, "Increment successfully updated!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error incrementing num in document", e);
+                                                }
+                                            });
+                                }
+                                else {
+                                    // If it does already exist, we can append to the list
+                                    System.out.println(Arrays.toString(events.toArray()));
+                                    // Append to the existing list
+                                    db.collection("Users").document(uid)
+                                            .update("events", FieldValue.arrayUnion(eventId))
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.d(TAG, "DocumentSnapshot successfully updated!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error updating document", e);
+                                                }
+                                            });
+                                    db.collection("Events").document(eventId)
+                                            .update("numPeople", FieldValue.increment(1))
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.d(TAG, "Increment successfully updated!");
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w(TAG, "Error incrementing num in document", e);
+                                                }
+                                            });
+                                }
+                                loadPage(eventId);
+                            }
+                        });
+                    }
+
+                }
+            }
+        });
+
+//        TextView tv = findViewById(R.id.tester);
+//        tv.setText(eventId);
+
+    }
+
+    private void unregister(String eventId) {
+        db.collection("Users").document(uid)
+                .update("events", FieldValue.arrayRemove(eventId))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
+        db.collection("Events").document(eventId)
+                .update("numPeople", FieldValue.increment(-1))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "Increment successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error incrementing num in document", e);
+                    }
+                });
+    }
+
+    private void loadPage(String eventId) {
         db.collection("Events").document(eventId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -91,70 +251,5 @@ public class Detail extends AppCompatActivity {
                 eventNumPpl.setText(numP.toString());
             }
         });
-
-        reg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(auth.getCurrentUser() == null) {
-                    // User not logged in so send them to login page
-                    startActivity(new Intent(Detail.this, SignInActivity.class));
-                }
-                else {
-                    // User is signed in so let them register
-                    db.collection("Users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            DocumentSnapshot ds = task.getResult();
-                            HashMap<String, Object> addEvents = new HashMap<>();
-                            List<String> events = (List<String>) ds.get("events");
-                            if(events == null) {
-                                // If there is no events, it returns null
-                                System.out.println("Events returned null");
-                                // Add the event into the document
-                                addEvents.put("events", Arrays.asList(eventId));
-                                db.collection("Users").document(uid)
-                                        .update(addEvents)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Log.d(TAG, "DocumentSnapshot successfully updated!");
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w(TAG, "Error updating document", e);
-                                            }
-                                        });
-                            }
-                            else {
-                                // If it does already exist, we can append to the list
-                                System.out.println(Arrays.toString(events.toArray()));
-                                // Append to the existing list
-                                db.collection("Users").document(uid)
-                                        .update("events", FieldValue.arrayUnion(eventId))
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Log.d(TAG, "DocumentSnapshot successfully updated!");
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w(TAG, "Error updating document", e);
-                                            }
-                                        });
-                            }
-                        }
-                    });
-
-                }
-            }
-        });
-
-//        TextView tv = findViewById(R.id.tester);
-//        tv.setText(eventId);
-
     }
 }

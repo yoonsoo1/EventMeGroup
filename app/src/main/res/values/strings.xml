@@ -12,4 +12,5 @@
     <string name="registeration">Register for this event</string>
     <string name="birthday">Enter Your Birthday</string>
     <string name="bday">Enter Birthday mm/dd/yyyy</string>
+    <string name="unreg">Unregister from this Event</string>
 </resources>
