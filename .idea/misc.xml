@@ -8,12 +8,14 @@
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/rectangle.xml" value="0.144" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_eventbox.xml" value="0.12613981762917933" />
         <entry key="app/src/main/res/layout/activity_explore.xml" value="0.12613981762917933" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18076782226562502" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_set_up.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/map.xml" value="0.1884498480243161" />
-        <entry key="app/src/main/res/layout/map_box.xml" value="0.21411895751953125" />
+        <entry key="app/src/main/res/layout/map_box.xml" value="0.375" />
         <entry key="app/src/main/res/layout/nav_bar.xml" value="0.1393110435663627" />
         <entry key="app/src/main/res/layout/profile.xml" value="0.23446197509765626" />
         <entry key="app/src/main/res/layout/search.xml" value="0.1884498480243161" />
