@@ -13,4 +13,5 @@
     <string name="birthday">Enter Your Birthday</string>
     <string name="bday">Enter Birthday mm/dd/yyyy</string>
     <string name="unreg">Unregister from this Event</string>
+    <string name="details">Click on the box to see event details</string>
 </resources>

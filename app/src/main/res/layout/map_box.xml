@@ -23,11 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="24dp"
-        android:text="See event details..."
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="26dp"
+        android:text="@string/details"
         app:layout_constraintBottom_toBottomOf="@+id/map_view"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
-        app:layout_constraintStart_toEndOf="@+id/textView8" />
+        app:layout_constraintStart_toStartOf="@+id/map_view"
+        android:ellipsize="end"
+        android:maxLines="1"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -36,11 +38,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
 
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="17dp"
         android:text="Date:"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="@+id/textView7" />
+        app:layout_constraintStart_toStartOf="@+id/map_view" />
 
     <TextView
         android:id="@+id/textView3"
@@ -56,33 +58,31 @@
 
     <TextView
         android:id="@+id/e_name"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="27dp"
         android:layout_marginTop="24dp"
-        android:text="CS310 Party"
-        app:layout_constraintStart_toStartOf="@+id/e_loc"
-        app:layout_constraintTop_toTopOf="@+id/map_view" />
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toTopOf="@+id/map_view" />
+        android:maxWidth="130dp"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/map_view"
+        android:ellipsize="end"
+        android:maxLines="1"
+        />
 
     <TextView
         android:id="@+id/e_loc"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
 
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginTop="10dp"
         android:maxWidth="100dp"
-        android:text="THH"
-        app:layout_constraintBottom_toTopOf="@+id/e_time"
-        app:layout_constraintEnd_toEndOf="@+id/map_view"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/e_name" />
+        app:layout_constraintStart_toStartOf="@+id/e_name"
+        app:layout_constraintTop_toBottomOf="@+id/e_name"
+        tools:maxWidth="130dp" />
 
     <TextView
         android:id="@+id/e_date"
@@ -90,13 +90,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginTop="19dp"
         android:text="11/8/2022"
-        app:layout_constraintEnd_toEndOf="@+id/map_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/e_cost" />
-        app:layout_constraintEnd_toEndOf="@+id/map_view"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
         android:id="@+id/e_time"
@@ -105,9 +103,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
 
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:text="9:30"
-        app:layout_constraintEnd_toEndOf="@+id/e_loc"
+        app:layout_constraintStart_toStartOf="@+id/e_loc"
         app:layout_constraintTop_toBottomOf="@+id/e_loc" />
 
     <TextView
@@ -117,7 +115,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
 
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:text="$5"
         app:layout_constraintStart_toStartOf="@+id/e_time"
         app:layout_constraintTop_toBottomOf="@+id/e_time" />
@@ -137,17 +135,16 @@
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
+        android:layout_height="0dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
 
-        android:layout_marginTop="52dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginStart="12dp"
         android:text="Sponsor: "
         android:textColor="#455A64"
-        app:layout_constraintBottom_toBottomOf="@+id/event_det"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintBottom_toBottomOf="@+id/e_spon"
+        app:layout_constraintStart_toStartOf="@+id/map_view"
+        app:layout_constraintTop_toTopOf="@+id/e_spon" />
 
     <TextView
         android:id="@+id/textView6"
@@ -155,7 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="10dp"
         android:text="Time:"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />

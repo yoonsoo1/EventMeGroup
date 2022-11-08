@@ -112,6 +112,7 @@ public class Detail extends AppCompatActivity {
                 else {
                     if(registered) {
                         unregister(eventId);
+                        loadPage(eventId);
                     }
                     else {
                         // User is signed in so let them register
@@ -189,6 +190,7 @@ public class Detail extends AppCompatActivity {
                                             });
                                 }
                                 loadPage(eventId);
+                                reg.setText(R.string.unreg);
                             }
                         });
                     }
@@ -231,6 +233,7 @@ public class Detail extends AppCompatActivity {
                         Log.w(TAG, "Error incrementing num in document", e);
                     }
                 });
+        reg.setText(R.string.registeration);
     }
 
     private void loadPage(String eventId) {

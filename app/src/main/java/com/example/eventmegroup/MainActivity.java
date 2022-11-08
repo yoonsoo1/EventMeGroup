@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        startActivity(new Intent(MainActivity.this, SetUpActivity.class));
-//        finish();
+        startActivity(new Intent(MainActivity.this, Map.class));
+        finish();
 
 //        System.out.println("here1");
 // test
