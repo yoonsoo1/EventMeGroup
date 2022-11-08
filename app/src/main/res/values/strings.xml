@@ -1,23 +1,32 @@
 <resources>
-    <string name="app_name">EventMeGroup</string>
-    <string name="checkDate">Date</string>
-    <string name="checkhour">Hour</string>
-    <string name="checkLocation">Location</string>
-    <string name="profile_picture">Profile picture</string>
-    <string name="name">Username</string>
-    <string name="email">Ε-mail</string>
-    <string name="description">Description</string>
-    <string name="Login">Sign in</string>
-    <string name="hour">Hour</string>
-    <string name="save">Save</string>
-    <string name="uploadPhoto">Upload new photo</string>
-    <string name="date">Date</string>
-    <string name="lastname">Last name</string>
-    <string name="re_enter_password">Re-enter Password</string>
-    <string name="changepassword">Change password</string>
-    <string name="loginregister">Login/Register</string>
-    <string name="myprofile">My profile</string>
-    <string name="eventname">Event Name</string>
-    <string name="register">Register Here</string>
-    <string name="color2">#DB6443</string>
+    <string name="app_name">EVENTME</string>
+
+    # LOG IN/SIGN UP
+    <string name="login">LOG IN</string>
+    <string name="name">USERNAME</string>
+
+    # EVENT BOX
+    <string name="eventname">EVENT NAME</string>
+    <string name="date">DATE AND TIME</string>
+    <string name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="register">REGISTER</string>
+
+    # EVENT
+    <string name="checkLocation">LOCATION</string>
+    <string name="checkDate">DATE</string>
+    <string name="checkTime">TIME</string>
+
+    # EVENT REGISTRATION
+
+
+    # PROFILE
+    <string name="myprofile">MY PROFILE</string>
+    <string name="profilePicture">PROFILE PICTURE</string>
+    <string name="fullName">FULL NAME</string>
+
+    <string name="uploadPhoto">UPLOAD NEW PHOTO</string>
+    <string name="save">SAVE</string>
+
+
+
 </resources>
