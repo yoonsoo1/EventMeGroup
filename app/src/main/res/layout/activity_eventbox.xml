@@ -59,7 +59,7 @@
                 android:background="@android:color/transparent"
                 android:text="@string/date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/orange"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_marginBottom="40dp"
                 android:fontFamily="@font/nunito"
@@ -95,7 +95,7 @@
                 android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/redbrown"
+                android:backgroundTint="@color/orange"
                 android:fontFamily="@font/nunito"
                 android:text="@string/register"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -103,8 +103,8 @@
                 android:textSize="20sp"
                 android:typeface="serif"
                 tools:ignore="ObsoleteLayoutParam"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginTop="40dp"
                 />
 
