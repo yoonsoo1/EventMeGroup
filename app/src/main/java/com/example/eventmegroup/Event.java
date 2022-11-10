@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 public class Event {
-    private String name, email, location, description;
+    private String name, email, location, description, type, sponsorOrg;
     private Date date;
     private Time time;
 
@@ -13,13 +13,15 @@ public class Event {
     public Event(){
 
     }
-    public Event(String n, String e, Date d, Time t, String l, String desc){
+    public Event(String n, String e, Date d, Time t, String l, String desc, String eventType, String sponsoringOrg){
         name = n;
         email = e;
         date = d;
         time = t;
         location = l;
         description = desc;
+        type = eventType;
+        sponsorOrg = sponsoringOrg;
     }
 
     // GETTERS
@@ -41,6 +43,12 @@ public class Event {
     public String getDescription(){
         return description;
     }
+    public String getEventType(){
+        return type;
+    }
+    public String getSponsorOrg(){
+        return sponsorOrg;
+    }
 
     // SETTERS
     public void setName(String n){
@@ -60,5 +68,11 @@ public class Event {
     }
     public void setDescription(String desc){
         description = desc;
+    }
+    public void setEventType(String eventType){
+        type = eventType;
+    }
+    public void setSponsorOrg(String sponsoringOrg){
+        sponsorOrg = sponsoringOrg;
     }
 }
