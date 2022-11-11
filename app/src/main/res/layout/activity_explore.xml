@@ -37,12 +37,103 @@
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:backgroundTint="@color/redbrown"
-                android:fontFamily="@font/montserrat"
+                android:fontFamily="@font/nunito"
                 android:iconifiedByDefault="false"
                 android:orientation="vertical"
                 android:padding="12dp"
                 android:queryHint="Search..."
                 android:text="@string/search" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="ALL"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/allbutton"
+                    android:textSize="12dp"
+                    android:layout_margin="5dp"
+                    />
+                <Button
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="PARTY"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/partybutton"
+                    android:textSize="12dp"
+                    android:layout_margin="5dp"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="SHOPPING"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/shopbutton"
+                    android:textSize="12dp"
+                    android:layout_margin="5dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/redbrown"
+                    android:text="COST"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/costsort"
+                    android:textSize="12dp"
+                    android:layout_margin="3dp"
+                    />
+                <Button
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/redbrown"
+                    android:text="PROXIMITY"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/proximitysort"
+                    android:textSize="10dp"
+                    android:layout_margin="3dp"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/redbrown"
+                    android:text="DATE"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/datesort"
+                    android:textSize="10dp"
+                    android:layout_margin="3dp"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/redbrown"
+                    android:text="ALPHABETICAL"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/alphabetsort"
+                    android:textSize="10dp"
+                    android:layout_margin="3dp"
+                    />
+
+            </LinearLayout>
 
             <ListView
                 android:id="@+id/listEvents"

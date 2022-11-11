@@ -26,6 +26,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -36,7 +37,7 @@ public class Explore extends AppCompatActivity {
     private LinearLayoutCompat eventContainer;
     private FirebaseAuth auth;
     private FirebaseFirestore db;
-    public ArrayList<Event> events = new ArrayList<Event>();
+    public static ArrayList<Event> events = new ArrayList<Event>();
     private String searchName;
     private ListView listView;
 
@@ -85,32 +86,6 @@ public class Explore extends AppCompatActivity {
         return resultList;
     }
 
-    // search via name, location, sponsoring org
-    public ArrayList<Event> eventSearch(String searchBy, String searchName){
-        ArrayList<Event> resultList = new ArrayList<Event>();
-
-        if (searchBy == "name") {  // search by name
-            for(Event event : events) {
-                if (event.getName() == searchName){
-                    resultList.add(event);
-                }
-            }
-        } else if (searchBy == "location") {
-            for(Event event : events) {
-                if (event.getLocation() == searchName){
-                    resultList.add(event);
-                }
-            }
-        } else if (searchBy == "sponsorOrg") {
-            for (Event event : events) {
-                if (event.getSponsorOrg() == searchName) {
-                    resultList.add(event);
-                }
-            }
-        }
-
-        return resultList;
-    }
 
     private void initSearchWidget(){  // search via name, location, sponsoring org
         SearchView searchView = (SearchView) findViewById(R.id.search_bar);
@@ -125,7 +100,9 @@ public class Explore extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 ArrayList<Event> filteredEvents = new ArrayList<Event>();
                 for(Event event: events) {
-                    if(event.getName().toLowerCase().contains(s.toLowerCase())){
+                    if(event.getName().toLowerCase().contains(s.toLowerCase())
+                    || event.getLocation().toLowerCase().contains(s.toLowerCase()) ||
+                            event.getSponsorOrg().toLowerCase().contains(s.toLowerCase())){
                         filteredEvents.add(event);
                     }
                 }
@@ -157,11 +134,6 @@ public class Explore extends AppCompatActivity {
         });
     }
 
-    // range of dates
-    public ArrayList<Event> eventDates(){
-        ArrayList<Event> resultList = new ArrayList<Event>();
-        return resultList;
-    }
 
     // sort via cost, proximity, date, alphabetical
     public ArrayList<Event> eventSort(){
