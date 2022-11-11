@@ -2,7 +2,6 @@ package com.example.eventmegroup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,7 +29,7 @@ public class EventBox extends AppCompatActivity {
         date.setText(mIntent.getStringExtra("Date")+"  "+
                 mIntent.getStringExtra("Time"));
         description.setText(mIntent.getStringExtra("Description"));
-        description.setMovementMethod(new ScrollingMovementMethod();
+        description.setMovementMethod(new ScrollingMovementMethod());
         image = (ImageView) findViewById(R.id.imageView);
 
 

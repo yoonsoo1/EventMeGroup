@@ -25,21 +25,13 @@ import java.util.Objects;
 public class Explore extends AppCompatActivity {
 
     private LinearLayoutCompat eventContainer;
+    public ArrayList<Event> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if(currentUser == null) {
-            startActivity(new Intent(Profile.this, SignInActivity.class));
-            finish();
-        }
-        else {
-            startActivity(new Intent(Profile.this, SetUpActivity.class));
-            finish();
-        }
+
     }
 
     public void onExploreReady(){
@@ -51,12 +43,24 @@ public class Explore extends AppCompatActivity {
     }
 
     // filter based on event type
+    public ArrayList eventTypeFilter(){
+        return events;
+    }
 
     // search via name, location, sponsoring org
+    public ArrayList eventSearch(){
+        return events;
+    }
 
     // range of dates
+    public ArrayList eventDates(){
+        return events;
+    }
 
     // sort via cost, proximity, date, alphabetical
+    public ArrayList eventSort(){
+        return events;
+    }
 
 
 
