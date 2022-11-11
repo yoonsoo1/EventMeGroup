@@ -5,15 +5,13 @@ import java.util.Date;
 
 
 public class Event {
-    private String name, email, location, description, type, sponsorOrg;
-    private Date date;
-    private Time time;
+    private String name, email, location, description, type, sponsorOrg, date, time;
 
     // CONSTRUCTORS
     public Event(){
 
     }
-    public Event(String n, String e, Date d, Time t, String l, String desc, String eventType, String sponsoringOrg){
+    public Event(String n, String e, String d, String t, String l, String desc, String eventType, String sponsoringOrg){
         name = n;
         email = e;
         date = d;
@@ -31,10 +29,10 @@ public class Event {
     public String getEmail(){
         return email;
     }
-    public Date getDate(){
+    public String getDate(){
         return date;
     }
-    public Time getTime(){
+    public String getTime(){
         return time;
     }
     public String getLocation(){
@@ -57,10 +55,10 @@ public class Event {
     public void setEmail(String e){
         email = e;
     }
-    public void setDate(Date d){
+    public void setDate(String d){
         date = d;
     }
-    public void setTime(Time t){
+    public void setTime(String t){
         time = t;
     }
     public void setLocation(String loc){

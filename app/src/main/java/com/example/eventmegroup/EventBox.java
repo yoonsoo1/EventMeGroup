@@ -32,7 +32,6 @@ public class EventBox extends AppCompatActivity {
         description.setMovementMethod(new ScrollingMovementMethod());
         image = (ImageView) findViewById(R.id.imageView);
 
-
         String tempForImageRetreival=mIntent.getStringExtra("Date");
 
         // set function for retrieving images for event
