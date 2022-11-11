@@ -22,7 +22,7 @@ public class EventBox extends AppCompatActivity {
         Intent mIntent = getIntent();
 
         // SET ALL COMPONENTS OF EVENT BOX
-        description=(TextView) findViewById(R.id.Description);
+        description = (TextView) findViewById(R.id.Description);
         date = (Button) findViewById(R.id.date);
         eventName = (Button) findViewById(R.id.ename);
         eventName.setText(mIntent.getStringExtra("Name"));
@@ -32,7 +32,7 @@ public class EventBox extends AppCompatActivity {
         description.setMovementMethod(new ScrollingMovementMethod());
         image = (ImageView) findViewById(R.id.imageView);
 
-        String tempForImageRetreival=mIntent.getStringExtra("Date");
+        String tempForImageRetreival = mIntent.getStringExtra("Date");
 
         // set function for retrieving images for event
         image.setAdjustViewBounds(true);
