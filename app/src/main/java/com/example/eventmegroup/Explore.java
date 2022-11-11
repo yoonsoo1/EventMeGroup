@@ -3,6 +3,19 @@ package com.example.eventmegroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+import android.os.Bundle;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,24 +26,37 @@ public class Explore extends AppCompatActivity {
 
     private LinearLayoutCompat eventContainer;
 
-        Date date1 = new Date();
-        Time time1 = new Time(60, 60, 60);
-
-        Event e1 = new Event("name1", "email1", date1, time1, "loc1", "desc1", "type1", "org1");
-        Event e2 = new Event("name1", "email2", date1, time1, "loc1", "desc1", "type1", "org1");
-        Event e3 = new Event("name1", "email3", date1, time1, "loc1", "desc1", "type2", "org2");
-        Event e4 = new Event("name1", "email4", date1, time1, "loc1", "desc1", "type2", "org2");
-
-        ArrayList<Event> eventArrayList = new ArrayList<>();
-
-        eventArrayList.add(e1);
-        eventArrayList.add(e2);
-        eventArrayList.add(e3);
-        eventArrayList.add(e4);
-
-        for(Event e: eventArrayList){
-            if(e.)
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_explore);
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        if(currentUser == null) {
+            startActivity(new Intent(Profile.this, SignInActivity.class));
+            finish();
         }
+        else {
+            startActivity(new Intent(Profile.this, SetUpActivity.class));
+            finish();
+        }
+    }
+
+    public void onExploreReady(){
+
+    }
+
+    public Explore(){
+
+    }
+
+    // filter based on event type
+
+    // search via name, location, sponsoring org
+
+    // range of dates
+
+    // sort via cost, proximity, date, alphabetical
 
 
 
