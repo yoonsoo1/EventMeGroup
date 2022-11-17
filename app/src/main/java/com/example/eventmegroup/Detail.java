@@ -43,6 +43,7 @@ public class Detail extends AppCompatActivity {
     private TextView eventCost;
     private TextView eventTime;
     private TextView eventNumPpl;
+    private TextView eventDur;
     private Button reg;
     private boolean registered;
 
@@ -60,6 +61,7 @@ public class Detail extends AppCompatActivity {
         eventCost = findViewById(R.id.event_cost);
         eventTime = findViewById(R.id.event_time);
         eventNumPpl = findViewById(R.id.event_num);
+        eventDur = findViewById(R.id.event_duration);
         reg = findViewById(R.id.register);
 
         auth = FirebaseAuth.getInstance();
@@ -190,6 +192,7 @@ public class Detail extends AppCompatActivity {
                                             });
                                 }
                                 loadPage(eventId);
+                                registered = true;
                                 reg.setText(R.string.unreg);
                             }
                         });
@@ -233,6 +236,7 @@ public class Detail extends AppCompatActivity {
                         Log.w(TAG, "Error incrementing num in document", e);
                     }
                 });
+        registered = false;
         reg.setText(R.string.registeration);
     }
 
