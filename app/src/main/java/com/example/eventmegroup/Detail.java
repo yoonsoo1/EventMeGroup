@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,6 +46,7 @@ public class Detail extends AppCompatActivity {
     private TextView eventTime;
     private TextView eventNumPpl;
     private TextView eventDur;
+    private ImageView imgView;
     private Button reg;
     private boolean registered;
 
@@ -62,6 +65,7 @@ public class Detail extends AppCompatActivity {
         eventTime = findViewById(R.id.event_time);
         eventNumPpl = findViewById(R.id.event_num);
         eventDur = findViewById(R.id.event_duration);
+        imgView = findViewById(R.id.event_pic);
         reg = findViewById(R.id.register);
 
         auth = FirebaseAuth.getInstance();
@@ -250,12 +254,16 @@ public class Detail extends AppCompatActivity {
                 String eCost = task.getResult().getString("cost");
                 String eTime = task.getResult().getString("time");
                 Long numP = task.getResult().getLong("numPeople");
+                Long eDur = task.getResult().getLong("duration");
+                String imgUri = task.getResult().getString("image");
                 eventName.setText(eName);
                 eventDate.setText(eDate);
                 eventAddy.setText(eAdd);
                 eventCost.setText(eCost);
                 eventTime.setText(eTime);
+                eventDur.setText(eDur.toString());
                 eventNumPpl.setText(numP.toString());
+                Glide.with(Detail.this).load(imgUri).into(imgView);
             }
         });
     }
