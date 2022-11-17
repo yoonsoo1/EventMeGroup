@@ -60,6 +60,7 @@ public class SetUpActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private FirebaseFirestore db;
     private Uri downloadUri = null;
+    private String ogImgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +86,10 @@ public class SetUpActivity extends AppCompatActivity {
                     if(task.getResult().exists()) {
                         String name = task.getResult().getString("name");
                         String birthdate = task.getResult().getString("bday");
-                        String imgUri = task.getResult().getString("image");
+                        ogImgUri = task.getResult().getString("image");
                         mProfileName.setText(name);
                         bday.setText(birthdate);
-                        Glide.with(SetUpActivity.this).load(imgUri).into(circleImageView);
+                        Glide.with(SetUpActivity.this).load(ogImgUri).into(circleImageView);
                     }
                 }
             }
@@ -121,15 +122,37 @@ public class SetUpActivity extends AppCompatActivity {
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Save the photo to firebase
-                final ProgressDialog pd = new ProgressDialog(SetUpActivity.this);
-                pd.setTitle("Uploading Image...");
-                pd.show();
 
                 String name = mProfileName.getText().toString();
                 String birthdate = bday.getText().toString();
-
-                if(!name.isEmpty() && !birthdate.isEmpty() && imageUri != null) {
+                System.out.println("Btn clicked " + name + birthdate);
+                System.out.println("imageUri = " + imageUri + " ogImgUri = " + ogImgUri);
+                System.out.println("Non empty");
+                if(!name.isEmpty() && !birthdate.isEmpty() && imageUri == null) {
+                    System.out.println("Pic is the same");
+                    HashMap<String, Object> nameToImg = new HashMap<>();
+                    nameToImg.put("name", name);
+                    nameToImg.put("bday", birthdate);
+                    nameToImg.put("image", ogImgUri);
+                    db.collection("Users").document(uid).set(nameToImg).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()) {
+                                Toast.makeText(SetUpActivity.this, "Successfully saved profile settings", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SetUpActivity.this, Profile.class));
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(SetUpActivity.this, "Failed to save profile settings", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+                else if(!name.isEmpty() && !birthdate.isEmpty() && imageUri != null) {
+                    // Save the photo to firebase
+                    final ProgressDialog pd = new ProgressDialog(SetUpActivity.this);
+                    pd.setTitle("Uploading Image...");
+                    pd.show();
                     StorageReference sr = storageReference.child("Profile_pics").child(uid + ".jpg");
                     sr.putFile(imageUri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
