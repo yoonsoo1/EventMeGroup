@@ -17,6 +17,7 @@
         tools:layout_editor_absoluteY="615dp" />
 
     <ImageButton
+        android:id="@+id/profile_nav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -27,6 +28,7 @@
         android:src="@drawable/ic_baseline_person_24" />
 
     <ImageButton
+        android:id="@+id/map_nav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -39,6 +41,7 @@
         android:src="@drawable/ic_baseline_location_on_24" />
 
     <ImageButton
+        android:id="@+id/search_nav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

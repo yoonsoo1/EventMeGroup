@@ -178,6 +178,9 @@ public class SetUpActivity extends AppCompatActivity {
                                 }
                             });
                 }
+                else {
+                    Toast.makeText(getApplicationContext(), "Cannot have empty picture, name, or birthday", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
