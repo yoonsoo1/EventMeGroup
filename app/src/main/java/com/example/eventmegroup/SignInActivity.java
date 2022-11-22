@@ -24,31 +24,6 @@ public class SignInActivity extends AppCompatActivity {
     private TextView sign_up_text;
     private TextView guest_text;
     private FirebaseAuth mAuth;
-    private String email;
-    private String pass;
-
-    protected int signInValCheck() {
-        email = signInEmail.getText().toString();
-        pass = signInPass.getText().toString();
-        String regexPattern = "^(.+)@(\\S+)$";
-        boolean emailReg = Pattern.compile(regexPattern).matcher(email).matches();
-
-        if(email.isEmpty()) {
-            return 2;
-        }
-        else if(pass.isEmpty()) {
-            return 3;
-        }
-        else if(pass.length() < 7) {
-            return 4;
-        }
-        else if(!emailReg) {
-            return 5;
-        }
-        else {
-            return 1;
-        }
-    }
 
 
     @Override
@@ -82,7 +57,11 @@ public class SignInActivity extends AppCompatActivity {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int validSignin = signInValCheck();
+                String email = signInEmail.getText().toString();
+                String pass = signInPass.getText().toString();
+                SignInVal val = new SignInVal(email, pass);
+                int validSignin = val.check();
+                System.out.println(validSignin);
                 if(validSignin == 1) {
                     mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
