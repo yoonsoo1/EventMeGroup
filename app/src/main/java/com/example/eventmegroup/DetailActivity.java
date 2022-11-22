@@ -16,16 +16,16 @@ public class DetailActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        getSelectedShape();
+        getSelectedEvent();
         setValues();
 
     }
 
-    private void getSelectedShape()
+    private void getSelectedEvent()
     {
         Intent previousIntent = getIntent();
         String parsedStringID = previousIntent.getStringExtra("id");
-        selectedEvent = Explore.events.get(Integer.valueOf(parsedStringID));
+        selectedEvent = Explore.allEvents.get(Integer.valueOf(parsedStringID));
     }
 
     private void setValues()
