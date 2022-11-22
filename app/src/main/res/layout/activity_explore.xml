@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="16dp">
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="50dp">
 
         <LinearLayout
             android:id="@+id/activity_explore"
@@ -25,32 +25,122 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
                 android:layout_marginTop="45dp"
-                android:textAlignment="center"
-                android:textSize="28dp"
                 android:fontFamily="@font/nunito"
+                android:text="@string/app_name"
+                android:textAlignment="center"
                 android:textColor="@color/redbrown"
-                />
+                android:textSize="28dp" />
 
-            <EditText
+            <SearchView
+                android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:backgroundTint="@color/redbrown"
+                android:fontFamily="@font/nunito"
+                android:iconifiedByDefault="false"
+                android:orientation="vertical"
                 android:padding="12dp"
-                android:text="@string/search"
-                android:fontFamily = "@font/montserrat"
-                android:orientation="vertical" />
+                android:queryHint="Search..."
+                android:text="@string/search" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="ALL"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/allbutton"
+                    android:textSize="12dp"
+                    android:layout_margin="5dp"
+                    />
+                <Button
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="PARTY"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/partybutton"
+                    android:textSize="12dp"
+                    android:layout_margin="5dp"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="SHOPPING"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/shopbutton"
+                    android:textSize="12dp"
+                    android:layout_margin="5dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sortButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/redbrown"
+                    android:text="COST"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/costsort"
+                    android:textSize="12dp"
+                    android:layout_margin="3dp"
+                    />
+                <Button
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/redbrown"
+                    android:text="PROXIMITY"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/proximitysort"
+                    android:textSize="10dp"
+                    android:layout_margin="3dp"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/redbrown"
+                    android:text="DATE"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/datesort"
+                    android:textSize="10dp"
+                    android:layout_margin="3dp"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/redbrown"
+                    android:text="ALPHABETICAL"
+                    android:fontFamily="@font/nunito"
+                    android:id="@+id/alphabetsort"
+                    android:textSize="10dp"
+                    android:layout_margin="3dp"
+                    />
+
+            </LinearLayout>
 
             <ListView
                 android:id="@+id/listEvents"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily = "@font/montserrat"
-                />
-
-
-
+                android:fontFamily="@font/montserrat" />
 
         </LinearLayout>
 
