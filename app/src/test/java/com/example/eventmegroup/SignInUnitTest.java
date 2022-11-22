@@ -52,4 +52,27 @@ public class SignInUnitTest {
         tester.setPass("alkjshdfaslkjdfhlkj13@@2");
         assertTrue(5 == tester.check());
     }
+
+    @Test
+    public void testBadPass() {
+        SignInVal tester = new SignInVal("yasdfa1@gmail.com", "");
+        try{
+            assertTrue(3 == tester.check());
+        }
+        catch (AssertionError e) {
+            System.out.println("tester.check() returned: " + tester.check());
+            throw e;
+        }
+
+
+        tester.setEmail("yasdf@yahoo.com");
+        assertTrue(3 == tester.check());
+
+        tester.setPass("a");
+        assertTrue(4 == tester.check());
+
+        tester.setPass("112");
+        assertTrue(4 == tester.check());
+
+    }
 }

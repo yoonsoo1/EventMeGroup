@@ -68,6 +68,10 @@ public class Detail extends AppCompatActivity {
         imgView = findViewById(R.id.event_pic);
         reg = findViewById(R.id.register);
 
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        db = FirebaseFirestore.getInstance();
+
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser() == null) {
             uid = null;
@@ -75,38 +79,33 @@ public class Detail extends AppCompatActivity {
         }
         else {
             uid = auth.getCurrentUser().getUid();
-        }
+            User currUser = new User(uid);
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
-        db = FirebaseFirestore.getInstance();
-
-        loadPage(eventId);
-
-        if(auth.getCurrentUser() != null) {
+            // Collect the data from the Firestore database
             db.collection("Users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     DocumentSnapshot ds = task.getResult();
                     HashMap<String, Object> addEvents = new HashMap<>();
                     ArrayList<String> events = (ArrayList<String>) ds.get("events");
-                    if(events == null) {
-                        registered = false;
-                        reg.setText(R.string.registeration);
-                    }
-                    else {
-                        if(events.contains(eventId)) {
-                            registered = true;
-                            reg.setText(R.string.unreg);
-                        }
-                        else {
+                    currUser.setRegisteredEvents(events);
+
+                    switch(currUser.registeredEvent(eventId)) {
+                        case 1:
+                        case 3:
                             registered = false;
                             reg.setText(R.string.registeration);
-                        }
+                            break;
+                        case 2:
+                            registered = true;
+                            reg.setText(R.string.unreg);
+                            break;
                     }
                 }
             });
         }
+
+        loadPage(eventId);
 
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
