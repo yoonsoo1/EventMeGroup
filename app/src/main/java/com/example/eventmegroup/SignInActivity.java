@@ -16,12 +16,40 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.regex.Pattern;
+
 public class SignInActivity extends AppCompatActivity {
     private EditText signInEmail, signInPass;
     private Button signInBtn;
     private TextView sign_up_text;
     private TextView guest_text;
     private FirebaseAuth mAuth;
+    private String email;
+    private String pass;
+
+    protected int signInValCheck() {
+        email = signInEmail.getText().toString();
+        pass = signInPass.getText().toString();
+        String regexPattern = "^(.+)@(\\S+)$";
+        boolean emailReg = Pattern.compile(regexPattern).matcher(email).matches();
+
+        if(email.isEmpty()) {
+            return 2;
+        }
+        else if(pass.isEmpty()) {
+            return 3;
+        }
+        else if(pass.length() < 7) {
+            return 4;
+        }
+        else if(!emailReg) {
+            return 5;
+        }
+        else {
+            return 1;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +82,8 @@ public class SignInActivity extends AppCompatActivity {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = signInEmail.getText().toString();
-                String pass = signInPass.getText().toString();
-
-                if(email.isEmpty()) {
-                    Toast.makeText(SignInActivity.this, "Please Enter a Valid Email", Toast.LENGTH_SHORT).show();
-                }
-                else if(pass.isEmpty()) {
-                    Toast.makeText(SignInActivity.this, "Please Enter a Valid Password", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                int validSignin = signInValCheck();
+                if(validSignin == 1) {
                     mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -78,6 +98,22 @@ public class SignInActivity extends AppCompatActivity {
                         }
                     });
                 }
+                else if(validSignin == 2) {
+                    Toast.makeText(SignInActivity.this, "Email Cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+                else if(validSignin == 3) {
+                    Toast.makeText(SignInActivity.this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+                else if(validSignin == 4) {
+                    Toast.makeText(SignInActivity.this, "Password cannot be less than 7 characters", Toast.LENGTH_SHORT).show();
+                }
+                else if(validSignin == 5) {
+                    Toast.makeText(SignInActivity.this, "Incorrect email format", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(SignInActivity.this, "Unknown input error. Please check input formatting.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

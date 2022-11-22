@@ -56,8 +56,4 @@ public class SetUpEspTest {
         onView(withId(R.id.bday)).check(matches(withText(bday_to_be_typed)));
     }
 
-    @Test
-    public void Test_Logout() throws InterruptedException {
-
-    }
 }

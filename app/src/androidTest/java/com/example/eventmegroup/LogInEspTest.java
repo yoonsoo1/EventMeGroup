@@ -36,7 +36,19 @@ public class LogInEspTest {
             new ActivityScenarioRule<SignInActivity>(SignInActivity.class);
 
     @Test
-    public void test_a_wrong_password_login() {
+    public void test_a_guest() throws InterruptedException {
+        onView(withId(R.id.guest_txt)).perform(click());
+        Thread.sleep(2000);
+        try {
+            onView(withId(R.id.map)).check(matches(isDisplayed()));
+        }
+        catch (AssertionFailedError e) {
+
+        }
+    }
+
+    @Test
+    public void test_b_wrong_password_login() {
         onView(withId(R.id.sign_in_email)).perform(typeText(testLogin));
         onView(withId(R.id.sign_in_pass)).perform(typeText(testWrongPass));
         closeSoftKeyboard();
@@ -47,7 +59,7 @@ public class LogInEspTest {
     }
 
     @Test
-    public void test_b_log_in_success() throws InterruptedException {
+    public void test_c_log_in_success() throws InterruptedException {
         onView(withId(R.id.sign_in_email)).perform(typeText(testLogin));
         onView(withId(R.id.sign_in_pass)).perform(typeText(testPass));
         closeSoftKeyboard();
