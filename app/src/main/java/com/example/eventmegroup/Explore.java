@@ -50,9 +50,6 @@ public class Explore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
-        Intent intent = new Intent();
-        startActivity(intent);
-
         onExploreReady();
         setUpList();
         setUpOnclickListener();
