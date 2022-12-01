@@ -63,27 +63,26 @@
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="50dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_num" />
 
+
     <TextView
         android:id="@+id/event_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
         android:text="Event Sign Ups"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/event_duration" />
 
-
     <TextView
-        android:id="@+id/event_duration"
+        android:id="@+id/event_duration2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
@@ -91,6 +90,16 @@
         android:text="@string/duration"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/event_time" />
+
+    <TextView
+        android:id="@+id/event_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="271dp"
+        android:text="hours long"
+        app:layout_constraintStart_toEndOf="@+id/event_duration2"
+        app:layout_constraintTop_toBottomOf="@+id/event_pic" />
 
     <ImageView
         android:id="@+id/event_pic"
@@ -101,5 +110,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/sign_up_count"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_duration2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
