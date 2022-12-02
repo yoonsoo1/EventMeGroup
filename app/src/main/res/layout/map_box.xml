@@ -77,7 +77,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-
+        android:ellipsize="end"
+        android:maxLines="1"
         android:layout_marginTop="10dp"
         android:maxWidth="100dp"
         app:layout_constraintStart_toStartOf="@+id/e_name"
@@ -102,7 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-
+        android:ellipsize="end"
+        android:maxLines="1"
         android:layout_marginTop="10dp"
         android:text="9:30"
         app:layout_constraintStart_toStartOf="@+id/e_loc"
@@ -126,7 +128,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-
+        android:ellipsize="end"
+        android:maxLines="1"
         android:layout_marginTop="16dp"
         android:text="USC"
         app:layout_constraintStart_toStartOf="@+id/e_date"
