@@ -42,6 +42,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 
 public class SetUpActivity extends AppCompatActivity {
 
@@ -58,6 +59,7 @@ public class SetUpActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private Uri downloadUri = null;
     private String ogImgUri;
+    private List<String> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +83,11 @@ public class SetUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()) {
                     if(task.getResult().exists()) {
+                        DocumentSnapshot ds = task.getResult();
                         String name = task.getResult().getString("name");
                         String birthdate = task.getResult().getString("bday");
                         ogImgUri = task.getResult().getString("image");
+                        events = (List<String>) ds.get("events");
                         mProfileName.setText(name);
                         bday.setText(birthdate);
                         Glide.with(SetUpActivity.this).load(ogImgUri).into(circleImageView);
@@ -131,6 +135,7 @@ public class SetUpActivity extends AppCompatActivity {
                     nameToImg.put("name", name);
                     nameToImg.put("bday", birthdate);
                     nameToImg.put("image", ogImgUri);
+                    nameToImg.put("events", events);
                     db.collection("Users").document(uid).set(nameToImg).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -157,7 +162,7 @@ public class SetUpActivity extends AppCompatActivity {
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     saveToFireStore(name, birthdate, sr);
                                     Toast.makeText(SetUpActivity.this, "Upload Successful",Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(SetUpActivity.this, SignInActivity.class));
+                                    startActivity(new Intent(SetUpActivity.this, Profile.class));
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -193,6 +198,7 @@ public class SetUpActivity extends AppCompatActivity {
                 nameToImg.put("name", name);
                 nameToImg.put("bday", birthdate);
                 nameToImg.put("image", downloadUri.toString());
+                nameToImg.put("events", events);
 
                 db.collection("Users").document(uid).set(nameToImg).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

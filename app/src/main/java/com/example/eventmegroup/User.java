@@ -11,8 +11,6 @@ public class User {
 
     User(String uid) {
         this.uid = uid;
-        eventDates = new ArrayList<>();
-        registeredEvents = new ArrayList<>();
     }
 
     public void setRegisteredEvents(ArrayList<String> registeredEvents) {
@@ -28,6 +26,12 @@ public class User {
     }
 
     public void addEvent(String eventId, EventDate date) {
+//        System.out.println("registedEvents: " + registeredEvents.toString());
+//        System.out.println("eventDates : " + eventDates.toString());
+        if(registeredEvents == null) {
+            eventDates = new ArrayList<EventDate>();
+            registeredEvents = new ArrayList<String>();
+        }
         registeredEvents.add(eventId);
         eventDates.add(date);
     }

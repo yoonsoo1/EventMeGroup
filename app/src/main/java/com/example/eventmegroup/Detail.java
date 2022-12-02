@@ -103,17 +103,19 @@ public class Detail extends AppCompatActivity {
                             break;
                     }
                     ArrayList<EventDate> dates = new ArrayList<>();
-                    for(String e : events) {
-                        db.collection("Events").document(e).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                String eDate = task.getResult().getString("date");
-                                String eTime = task.getResult().getString("time");
-                                Long eDur = task.getResult().getLong("duration");
-                                EventDate currEDate = new EventDate(eDate, eTime, eDur.toString());
-                                dates.add(currEDate);
-                            }
-                        });
+                    if(events != null) {
+                        for(String e : events) {
+                            db.collection("Events").document(e).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    String eDate = task.getResult().getString("date");
+                                    String eTime = task.getResult().getString("time");
+                                    Long eDur = task.getResult().getLong("duration");
+                                    EventDate currEDate = new EventDate(eDate, eTime, eDur.toString());
+                                    dates.add(currEDate);
+                                }
+                            });
+                        }
                     }
 
                     currUser.setEventDates(dates);
@@ -261,6 +263,7 @@ public class Detail extends AppCompatActivity {
                     }
                 }
                 // Checking for conflict done so continue to add event
+                System.out.println("currUser = " + currUser);
                 currUser.addEvent(eventId, currEDate);
                 HashMap<String, Object> addEvents = new HashMap<>();
                 addEvents.put("events", currUser.getRegisteredEvents());
