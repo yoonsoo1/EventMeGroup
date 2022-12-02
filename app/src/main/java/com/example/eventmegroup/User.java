@@ -23,6 +23,10 @@ public class User {
         return registeredEvents;
     }
 
+    public ArrayList<EventDate> getEventDates() {
+        return eventDates;
+    }
+
     public void addEvent(String eventId, EventDate date) {
         registeredEvents.add(eventId);
         eventDates.add(date);
@@ -43,15 +47,8 @@ public class User {
         return 0;
     }
 
-    public void setEventDates(ArrayList<String> eventDatesStr) {
-        String currDates;
-        for(int i = 0; i < eventDates.size(); i++) {
-            currDates = eventDatesStr.get(i);
-            // Array of eventDate is a concat string of date + time + duration
-            String[] eventD = currDates.split(" ");
-            EventDate ed = new EventDate(eventD[0], eventD[1], eventD[2]);
-            eventDates.add(ed);
-        }
+    public void setEventDates(ArrayList<EventDate> eventDates) {
+        this.eventDates = eventDates;
     }
 
     public int registeredEvent(String event) {
@@ -70,6 +67,31 @@ public class User {
 
     public boolean eventConf(EventDate newEvent) {
         // Check if the new event has any conflicts with the events in eventDates
+        for(EventDate ed : eventDates) {
+            if(ed.getYear() == newEvent.getYear()
+                    && ed.getMonth() == newEvent.getMonth())
+            {
+                if(ed.getStartDay() <= newEvent.getEndDay() &&
+                newEvent.getStartDay() <= ed.getEndDay()) {
+                    int edStart = ed.getStartHour() * 100 + ed.getStartMin();
+                    int edEnd = ed.getEndHour() * 100 + ed.getEndMin();
+                    int neStart = newEvent.getStartHour() * 100 + newEvent.getStartMin();
+                    int neEnd = newEvent.getEndHour() * 100 + newEvent.getEndMin();
+
+                    if(ed.getEndDay() > ed.getStartDay()) {
+                        edStart += ( ed.getEndDay() - ed.getStartDay() ) * 24 * 100;
+                    }
+                    if(newEvent.getStartDay() > newEvent.getEndDay()) {
+                        neStart += ( newEvent.getEndDay() - newEvent.getStartDay() * 24 * 100 );
+                    }
+
+                    // Check overlap in hours
+                    if(edStart <= neEnd && neStart <= edEnd) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 }

@@ -21,7 +21,12 @@ public class EventDate {
         this.year = parseInt(dates[2]);
         String[] time = startTime.split(" ");
         String[] hm = time[0].split("[:]+");
-        startMin = parseInt(hm[1]);
+        if(hm.length > 1) {
+            startMin = parseInt(hm[1]);
+        }
+        else {
+            startMin = 0;
+        }
         // Change the time to military time for easiness of comparison
         if(time[1].equals("AM")) {
             startHour = parseInt(hm[0]);

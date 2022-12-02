@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -48,6 +49,7 @@ public class Detail extends AppCompatActivity {
     private User currUser;
     private int confNotif = 0;
     private boolean conflict = false;
+    private ArrayList<String> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class Detail extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     DocumentSnapshot ds = task.getResult();
                     HashMap<String, Object> addEvents = new HashMap<>();
-                    ArrayList<String> events = (ArrayList<String>) ds.get("events");
+                    events = (ArrayList<String>) ds.get("events");
                     currUser.setRegisteredEvents(events);
 
                     switch(currUser.registeredEvent(eventId)) {
@@ -100,8 +102,25 @@ public class Detail extends AppCompatActivity {
                             reg.setText(R.string.unreg);
                             break;
                     }
+                    ArrayList<EventDate> dates = new ArrayList<>();
+                    for(String e : events) {
+                        db.collection("Events").document(e).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                String eDate = task.getResult().getString("date");
+                                String eTime = task.getResult().getString("time");
+                                Long eDur = task.getResult().getLong("duration");
+                                EventDate currEDate = new EventDate(eDate, eTime, eDur.toString());
+                                dates.add(currEDate);
+                            }
+                        });
+                    }
+
+                    currUser.setEventDates(dates);
                 }
             });
+
+
         }
 
         loadPage(eventId);
@@ -202,7 +221,7 @@ public class Detail extends AppCompatActivity {
 //                        });
 
                         register(eventId);
-                        loadPage(eventId);
+
                         registered = true;
                         reg.setText(R.string.unreg);
                     }
@@ -276,6 +295,7 @@ public class Detail extends AppCompatActivity {
                                 Log.w(TAG, "Error incrementing num in document", e);
                             }
                         });
+                loadPage(eventId);
             }
         });
     }
