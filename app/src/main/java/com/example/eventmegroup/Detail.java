@@ -221,9 +221,6 @@ public class Detail extends AppCompatActivity {
 //                        });
 
                         register(eventId);
-
-                        registered = true;
-                        reg.setText(R.string.unreg);
                     }
 
                 }
@@ -247,6 +244,8 @@ public class Detail extends AppCompatActivity {
                 if(conflict) {
                     if(confNotif > 0) {
                         confNotif = 0;
+                        registered = true;
+                        reg.setText(R.string.unreg);
                     }
                     else { // This shouldn't happen but in case
                         confNotif++;
