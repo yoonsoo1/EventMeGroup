@@ -5,7 +5,6 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -28,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,7 +42,6 @@ import com.google.firebase.storage.UploadTask;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class SetUpActivity extends AppCompatActivity {
 
@@ -70,7 +67,7 @@ public class SetUpActivity extends AppCompatActivity {
         circleImageView = findViewById(R.id.circleImageView);
         mProfileName = findViewById(R.id.profile_name);
         bday = findViewById(R.id.bday);
-        mSaveBtn = findViewById(R.id.save_btn);
+        mSaveBtn = findViewById(R.id.edit_btn);
         logOutBtn = findViewById(R.id.log_out_btn);
 
         auth = FirebaseAuth.getInstance();

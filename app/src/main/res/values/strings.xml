@@ -135,6 +135,8 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="sign_up_count">RSVP</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="prof_event_box">This is the event box where all of user\'s registered events will be presented.</string>
 
 
 </resources>

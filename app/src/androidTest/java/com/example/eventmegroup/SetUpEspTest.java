@@ -5,13 +5,11 @@ import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import androidx.test.espresso.ViewAction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
@@ -37,7 +35,7 @@ public class SetUpEspTest {
         onView(withId(R.id.profile_name)).perform(typeText(name_to_be_typed));
         closeSoftKeyboard();
 
-        onView(withId(R.id.save_btn)).perform(click());
+        onView(withId(R.id.edit_btn)).perform(click());
         Thread.sleep(2000);
 
         onView(withId(R.id.profile_name)).check(matches(withText(name_to_be_typed)));
@@ -50,7 +48,7 @@ public class SetUpEspTest {
         onView(withId(R.id.bday)).perform(typeText(bday_to_be_typed));
         closeSoftKeyboard();
 
-        onView(withId(R.id.save_btn)).perform(click());
+        onView(withId(R.id.edit_btn)).perform(click());
         Thread.sleep(2000);
 
         onView(withId(R.id.bday)).check(matches(withText(bday_to_be_typed)));

@@ -244,8 +244,6 @@ public class Detail extends AppCompatActivity {
                 if(conflict) {
                     if(confNotif > 0) {
                         confNotif = 0;
-                        registered = true;
-                        reg.setText(R.string.unreg);
                     }
                     else { // This shouldn't happen but in case
                         confNotif++;
@@ -294,6 +292,8 @@ public class Detail extends AppCompatActivity {
                                 Log.w(TAG, "Error incrementing num in document", e);
                             }
                         });
+                registered = true;
+                reg.setText(R.string.unreg);
                 loadPage(eventId);
             }
         });
