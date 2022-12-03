@@ -5,7 +5,6 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -28,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,7 +42,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.UUID;
+import java.util.List;
 
 public class SetUpActivity extends AppCompatActivity {
 
@@ -60,6 +58,8 @@ public class SetUpActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private FirebaseFirestore db;
     private Uri downloadUri = null;
+    private String ogImgUri;
+    private List<String> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class SetUpActivity extends AppCompatActivity {
         circleImageView = findViewById(R.id.circleImageView);
         mProfileName = findViewById(R.id.profile_name);
         bday = findViewById(R.id.bday);
-        mSaveBtn = findViewById(R.id.save_btn);
+        mSaveBtn = findViewById(R.id.edit_btn);
         logOutBtn = findViewById(R.id.log_out_btn);
 
         auth = FirebaseAuth.getInstance();
@@ -83,12 +83,14 @@ public class SetUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()) {
                     if(task.getResult().exists()) {
+                        DocumentSnapshot ds = task.getResult();
                         String name = task.getResult().getString("name");
                         String birthdate = task.getResult().getString("bday");
-                        String imgUri = task.getResult().getString("image");
+                        ogImgUri = task.getResult().getString("image");
+                        events = (List<String>) ds.get("events");
                         mProfileName.setText(name);
                         bday.setText(birthdate);
-                        Glide.with(SetUpActivity.this).load(imgUri).into(circleImageView);
+                        Glide.with(SetUpActivity.this).load(ogImgUri).into(circleImageView);
                     }
                 }
             }
@@ -121,15 +123,38 @@ public class SetUpActivity extends AppCompatActivity {
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Save the photo to firebase
-                final ProgressDialog pd = new ProgressDialog(SetUpActivity.this);
-                pd.setTitle("Uploading Image...");
-                pd.show();
 
                 String name = mProfileName.getText().toString();
                 String birthdate = bday.getText().toString();
-
-                if(!name.isEmpty() && !birthdate.isEmpty() && imageUri != null) {
+                System.out.println("Btn clicked " + name + birthdate);
+                System.out.println("imageUri = " + imageUri + " ogImgUri = " + ogImgUri);
+                System.out.println("Non empty");
+                if(!name.isEmpty() && !birthdate.isEmpty() && imageUri == null) {
+                    System.out.println("Pic is the same");
+                    HashMap<String, Object> nameToImg = new HashMap<>();
+                    nameToImg.put("name", name);
+                    nameToImg.put("bday", birthdate);
+                    nameToImg.put("image", ogImgUri);
+                    nameToImg.put("events", events);
+                    db.collection("Users").document(uid).set(nameToImg).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()) {
+                                Toast.makeText(SetUpActivity.this, "Successfully saved profile settings", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SetUpActivity.this, Profile.class));
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(SetUpActivity.this, "Failed to save profile settings", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+                else if(!name.isEmpty() && !birthdate.isEmpty() && imageUri != null) {
+                    // Save the photo to firebase
+                    final ProgressDialog pd = new ProgressDialog(SetUpActivity.this);
+                    pd.setTitle("Uploading Image...");
+                    pd.show();
                     StorageReference sr = storageReference.child("Profile_pics").child(uid + ".jpg");
                     sr.putFile(imageUri)
                             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -137,7 +162,7 @@ public class SetUpActivity extends AppCompatActivity {
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     saveToFireStore(name, birthdate, sr);
                                     Toast.makeText(SetUpActivity.this, "Upload Successful",Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(SetUpActivity.this, SignInActivity.class));
+                                    startActivity(new Intent(SetUpActivity.this, Profile.class));
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -155,6 +180,9 @@ public class SetUpActivity extends AppCompatActivity {
                                 }
                             });
                 }
+                else {
+                    Toast.makeText(getApplicationContext(), "Cannot have empty picture, name, or birthday", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -170,6 +198,7 @@ public class SetUpActivity extends AppCompatActivity {
                 nameToImg.put("name", name);
                 nameToImg.put("bday", birthdate);
                 nameToImg.put("image", downloadUri.toString());
+                nameToImg.put("events", events);
 
                 db.collection("Users").document(uid).set(nameToImg).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

@@ -8,19 +8,26 @@
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/rectangle.xml" value="0.144" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_eventbox.xml" value="0.12613981762917933" />
-        <entry key="app/src/main/res/layout/activity_explore.xml" value="0.12613981762917933" />
+        <entry key="app/src/main/res/font/montserrat.xml" value="0.5463541666666667" />
+        <entry key="app/src/main/res/font/nunito.xml" value="0.5463541666666667" />
+        <entry key="app/src/main/res/font/nunitobold.xml" value="0.5463541666666667" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_eventbox.xml" value="0.24814814814814815" />
+        <entry key="app/src/main/res/layout/activity_explore.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18076782226562502" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_set_up.xml" value="0.19630192502532928" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/event_cell.xml" value="0.19972826086956522" />
+        <entry key="app/src/main/res/layout/fragment_activity_explore.xml" value="0.40307971014492755" />
         <entry key="app/src/main/res/layout/map.xml" value="0.1884498480243161" />
         <entry key="app/src/main/res/layout/map_box.xml" value="0.375" />
         <entry key="app/src/main/res/layout/nav_bar.xml" value="0.1393110435663627" />
-        <entry key="app/src/main/res/layout/profile.xml" value="0.23446197509765626" />
+        <entry key="app/src/main/res/layout/profile.xml" value="0.165" />
         <entry key="app/src/main/res/layout/search.xml" value="0.1884498480243161" />
         <entry key="app/src/main/res/menu/nav_bar.xml" value="0.2512820512820513" />
+        <entry key="app/src/main/res/xml/gradle.xml" value="0.2510131712259372" />
+        <entry key="app/src/main/res/xml/misc.xml" value="0.2510131712259372" />
       </map>
     </option>
   </component>
@@ -29,5 +36,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

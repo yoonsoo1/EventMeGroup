@@ -31,7 +31,7 @@ public class Search extends AppCompatActivity {
     }
 
     public void goSearch(View view){
-        Intent intent = new Intent(this, Search.class);
+        Intent intent = new Intent(this, Explore.class);
         startActivity(intent);
     }
 

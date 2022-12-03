@@ -16,12 +16,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.regex.Pattern;
+
 public class SignInActivity extends AppCompatActivity {
     private EditText signInEmail, signInPass;
     private Button signInBtn;
     private TextView sign_up_text;
     private TextView guest_text;
     private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +59,10 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = signInEmail.getText().toString();
                 String pass = signInPass.getText().toString();
-
-                if(email.isEmpty()) {
-                    Toast.makeText(SignInActivity.this, "Please Enter a Valid Email", Toast.LENGTH_SHORT).show();
-                }
-                else if(pass.isEmpty()) {
-                    Toast.makeText(SignInActivity.this, "Please Enter a Valid Password", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                SignInVal val = new SignInVal(email, pass);
+                int validSignin = val.check();
+                System.out.println(validSignin);
+                if(validSignin == 1) {
                     mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -78,6 +77,22 @@ public class SignInActivity extends AppCompatActivity {
                         }
                     });
                 }
+                else if(validSignin == 2) {
+                    Toast.makeText(SignInActivity.this, "Email Cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+                else if(validSignin == 3) {
+                    Toast.makeText(SignInActivity.this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+                else if(validSignin == 4) {
+                    Toast.makeText(SignInActivity.this, "Password cannot be less than 7 characters", Toast.LENGTH_SHORT).show();
+                }
+                else if(validSignin == 5) {
+                    Toast.makeText(SignInActivity.this, "Incorrect email format", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(SignInActivity.this, "Unknown input error. Please check input formatting.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

@@ -23,7 +23,7 @@ public class NavBar extends AppCompatActivity {
     }
 
     public void goSearch(View view){
-        Intent intent = new Intent(NavBar.this, Search.class);
+        Intent intent = new Intent(NavBar.this, Explore.class);
         startActivity(intent);
     }
 }

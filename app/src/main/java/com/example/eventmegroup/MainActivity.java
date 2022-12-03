@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
+import android.widget.SearchView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goSearch(View view){
-        Intent intent = new Intent(this, Search.class);
+        Intent intent = new Intent(this, Explore.class);
         startActivity(intent);
     }
+
 }
