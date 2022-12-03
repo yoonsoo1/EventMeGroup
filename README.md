@@ -14,5 +14,3 @@ Oscar: Added more user functionality to the Google Map for easier navigation; ad
 
 Yoonsoo: Implemented the eventbox that shows the user's currently RSVP'ed events. Also, implemented the 
 warning that pops up if there is any conflicting events.
-
-Alice: TBA
