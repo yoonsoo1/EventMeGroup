@@ -52,6 +52,10 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setMapToolbarEnabled(true);
+
         db.collection("Events").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -148,6 +152,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback, Google
                 dateTv.setText(eDate);
                 sponTv.setText(eSpons);
             }
+
+            public void onSwipe(){}
         });
         return infoV;
     }
